@@ -12,6 +12,16 @@ public:
     }
 };
 
+class WRITEException : public std::exception
+{
+public:
+    explicit WRITEException(char const* Messeage)
+        : exception(Messeage)
+    {
+
+    }
+};
+
 
 DeviceDriver::DeviceDriver(FlashMemoryDevice* hardware) : m_hardware(hardware)
 {}
@@ -34,6 +44,12 @@ int DeviceDriver::read(long address)
 
 void DeviceDriver::write(long address, int data)
 {
-    // TODO: implement this method
-    m_hardware->write(address, (unsigned char)data);
+    if (IsWritable(address) == false) throw WRITEException("WrongAddress");
+        m_hardware->write(address, (unsigned char)data);
+}
+
+bool DeviceDriver::IsWritable(long address)
+{
+	return ((int)(m_hardware->read(address)) == WRITABLE);
+	
 }
