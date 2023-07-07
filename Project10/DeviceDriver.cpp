@@ -18,14 +18,12 @@ DeviceDriver::DeviceDriver(FlashMemoryDevice* hardware) : m_hardware(hardware)
 
 int DeviceDriver::read(long address)
 {
-    // TODO: implement this method properly
-    int value = 0;
+    int value =  (int)m_hardware->read(address);
 
-    value = m_hardware->read(address);
     for(int index=0;index< MAXREADCOUNT-1;index++)
     {
-        Sleep(200);
-        if(value != m_hardware->read(address))
+        Sleep(SLEEPTIME_FOR_READ);
+        if(value != (int)m_hardware->read(address))
         {
             throw READException("wrongReadValue");
         }

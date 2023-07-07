@@ -11,4 +11,5 @@ public:
 protected:
     FlashMemoryDevice* m_hardware;
     int MAXREADCOUNT = 5;
+    int SLEEPTIME_FOR_READ = 200;
 };

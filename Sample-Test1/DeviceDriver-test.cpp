@@ -32,6 +32,7 @@ TEST(TestDeviceDriver, Driver_ReadException) {
 	MockFlashMemory mock;
 
 	EXPECT_CALL(mock, read)
+		.Times(3)
 		.WillOnce(Return((unsigned char)0xf1))
 		.WillOnce(Return((unsigned char)0xf1))
 		.WillRepeatedly(Return((unsigned char)0xff));
