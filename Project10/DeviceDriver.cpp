@@ -22,7 +22,7 @@ int DeviceDriver::read(long address)
     int value = 0;
 
     value = m_hardware->read(address);
-    for(int index=0;index<4;index++)
+    for(int index=0;index< MAXREADCOUNT-1;index++)
     {
         Sleep(200);
         if(value != m_hardware->read(address))
